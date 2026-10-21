@@ -67,17 +67,16 @@ npm run package   # builds the .vsix
 
 ### Publishing
 
-Both stores read their token from an environment variable: `VSCE_PAT` for the VS Code
-Marketplace (an Azure DevOps personal access token with the **Marketplace: Manage** scope, for
-publisher `stefan1575`) and `OVSX_PAT` for Open VSX.
+For a new release, bump `version` in `package.json`, add it to `CHANGELOG.md`, run
+`npm run package`, then:
 
-```sh
-npm run verify:marketplace   # checks VSCE_PAT can publish as stefan1575
-npm run publish:marketplace
-npm run publish:openvsx
-```
-
-For a new release, bump `version` in `package.json`, add it to `CHANGELOG.md`, then publish to both.
+- **Open VSX:** `npm run publish:openvsx` (reads the token from `OVSX_PAT`).
+- **VS Code Marketplace:** on https://marketplace.visualstudio.com/manage/publishers/stefan1575,
+  open the extension's **⋯ → Update** and upload the new `.vsix`, pressing Upload by hand (the
+  page's reCAPTCHA rejects automated clicks). The command-line route
+  (`npm run publish:marketplace` with a `VSCE_PAT` Azure DevOps token, scope Marketplace: Manage)
+  needs an Azure DevOps organization, which for this account asks for an Azure subscription.
+- **GitHub:** `gh release create v<version> <file>.vsix`.
 
 ## License
 
