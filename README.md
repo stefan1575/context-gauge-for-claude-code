@@ -62,8 +62,22 @@ Changing a setting re-applies the patch; reload the window to see it.
 ```sh
 npm test          # patches a copy of your installed Claude Code bundle and checks it parses
 npm run icon      # redraws images/icon.png
-npx @vscode/vsce package
+npm run package   # builds the .vsix
 ```
+
+### Publishing
+
+Both stores read their token from an environment variable: `VSCE_PAT` for the VS Code
+Marketplace (an Azure DevOps personal access token with the **Marketplace: Manage** scope, for
+publisher `stefan1575`) and `OVSX_PAT` for Open VSX.
+
+```sh
+npm run verify:marketplace   # checks VSCE_PAT can publish as stefan1575
+npm run publish:marketplace
+npm run publish:openvsx
+```
+
+For a new release, bump `version` in `package.json`, add it to `CHANGELOG.md`, then publish to both.
 
 ## License
 

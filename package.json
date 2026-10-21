@@ -71,7 +71,10 @@
   "scripts": {
     "test": "node --test",
     "icon": "node scripts/make-icon.js",
-    "package": "vsce package",
+    "package": "npx --yes @vscode/vsce@4 package",
+    "verify:marketplace": "npx --yes @vscode/vsce@4 verify-pat stefan1575",
+    "publish:marketplace": "npx --yes @vscode/vsce@4 publish",
+    "publish:openvsx": "npx --yes ovsx@0.10 publish",
     "vscode:uninstall": "node ./uninstall.js"
   }
 }
