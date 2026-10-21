@@ -1,0 +1,77 @@
+{
+  "name": "context-gauge-for-claude-code",
+  "displayName": "Context Gauge for Claude Code",
+  "description": "Always-on context gauge in Claude Code's prompt box: tokens in context, green/orange/red at your thresholds, and the /context breakdown on hover.",
+  "version": "0.1.0",
+  "publisher": "stefan1575",
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stefan1575/context-gauge-for-claude-code.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stefan1575/context-gauge-for-claude-code/issues"
+  },
+  "homepage": "https://github.com/stefan1575/context-gauge-for-claude-code#readme",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "claude",
+    "claude code",
+    "context",
+    "tokens",
+    "anthropic"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "extensionDependencies": [
+    "anthropic.claude-code"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "contextGauge.reapply",
+        "title": "Re-apply",
+        "category": "Context Gauge"
+      },
+      {
+        "command": "contextGauge.restore",
+        "title": "Restore Claude Code",
+        "category": "Context Gauge"
+      }
+    ],
+    "configuration": {
+      "title": "Context Gauge",
+      "properties": {
+        "contextGauge.warnTokens": {
+          "type": "number",
+          "default": 150000,
+          "minimum": 1000,
+          "markdownDescription": "Tokens in context at which the gauge turns orange (two thirds full). Below it, green (one third)."
+        },
+        "contextGauge.alertTokens": {
+          "type": "number",
+          "default": 300000,
+          "minimum": 1000,
+          "markdownDescription": "Tokens in context at which the gauge turns red (full)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "node --test",
+    "icon": "node scripts/make-icon.js",
+    "package": "vsce package",
+    "vscode:uninstall": "node ./uninstall.js"
+  }
+}
